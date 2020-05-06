@@ -1,9 +1,10 @@
 /*eslint-disable*/
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -23,7 +24,30 @@ import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
+  const [isUserAuthenticated, setisUserAuthenticated] = useState(false);
   const classes = useStyles();
+
+  useEffect(() => {
+    axios
+      .get("/userdata")
+      .then((res) => {
+        res.data.email !== undefined && res.data.email !== ""
+          ? setisUserAuthenticated(true)
+          : setisUserAuthenticated(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const handleClick = () => {
+    window.location.replace("/auth/google");
+  };
+
+  const logout = () => {
+    window.location.replace("/logout");
+  };
+
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
@@ -32,7 +56,7 @@ export default function HeaderLinks(props) {
           buttonText="Components"
           buttonProps={{
             className: classes.navLink,
-            color: "transparent"
+            color: "transparent",
           }}
           buttonIcon={Apps}
           dropdownList={[
@@ -59,12 +83,12 @@ export default function HeaderLinks(props) {
           <CloudDownload className={classes.icons} /> Download
         </Button>
       </ListItem> */}
-      <ListItem className={classes.listItem}>
-        {/*<Tooltip title="Delete">
+      {/* <ListItem className={classes.listItem}>
+        <Tooltip title="Delete">
           <IconButton aria-label="Delete">
             <DeleteIcon />
           </IconButton>
-        </Tooltip>*/}
+        </Tooltip>
         <Tooltip
           id="instagram-twitter"
           title="do we want any of this?"
@@ -97,23 +121,36 @@ export default function HeaderLinks(props) {
             <i className={classes.socialIcons + " fab fa-facebook"} />
           </Button>
         </Tooltip>
-      </ListItem>
+      </ListItem> */}
       <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-tooltip"
-          title="do we want any of this?"
-          placement={window.innerWidth > 959 ? "top" : "left"}
-          classes={{ tooltip: classes.tooltip }}
-        >
+        {isUserAuthenticated ? (
           <Button
             color="transparent"
             href=""
             target="_blank"
             className={classes.navLink}
+            onClick={logout}
           >
-            <i className={classes.socialIcons + " fab fa-instagram"} />
+            Logout
           </Button>
-        </Tooltip>
+        ) : (
+          <Tooltip
+            id="instagram-tooltip"
+            title="Login with Google"
+            placement={window.innerWidth > 959 ? "top" : "left"}
+            classes={{ tooltip: classes.tooltip }}
+          >
+            <Button
+              color="transparent"
+              href=""
+              target="_blank"
+              className={classes.navLink}
+              onClick={handleClick}
+            >
+              Volunteer Seeker Login
+            </Button>
+          </Tooltip>
+        )}
       </ListItem>
     </List>
   );

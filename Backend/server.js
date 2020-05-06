@@ -4,6 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const app = express();
 const port = process.env.PORT || 5000;
+const path = require("path");
 
 //routes
 // volunteerSeeker routes
@@ -12,7 +13,6 @@ const VolunteerSeeker = require("./models/volunteerSeekerLogin.model");
 app.use(cors());
 app.use(express.json());
 require("dotenv").config();
-app.get("/", (req, res) => res.send("Hello World!"));
 
 // MongoDB configuration
 const uri = process.env.ATLAS_URI;
@@ -108,13 +108,39 @@ app.get(
   }
 );
 
-// Ask about this - using this to retrieve user data from the Passport 'profile' object
+// Logout route
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, "../Frontend/", "build/")));
+
+app.get("/", (req, res) => {
+  // send landing page
+  res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
+});
+
+app.get("/login-page", (req, res) => {
+  // send login page
+  res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
+});
+
+app.get("/profile-page", (req, res) => {
+  // send profile page
+  res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
+});
+
+
+// Endpoint for this user's data
 app.get("/userdata", isUserAuthenticated, (req, res) => {
-  Users.find({ email: req.user }, function (err, result) {
+  VolunteerSeeker.findOne({ email: req.user.email }, function (err, result) {
     console.log(result);
     res.send(result);
   });
 });
+
 
 app.get("/volunteerSeeker/", (req, res) => {
   VolunteerSeeker.find()
