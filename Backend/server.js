@@ -5,6 +5,10 @@ const mongoose = require("mongoose");
 const app = express();
 const port = process.env.PORT || 5000;
 
+//routes
+// volunteerSeeker routes
+const VolunteerSeeker = require("./models/volunteerSeekerLogin.model");
+
 app.use(cors());
 app.use(express.json());
 require("dotenv").config();
@@ -23,9 +27,94 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
 
-//routes
-// volunteerSeeker routes
-const VolunteerSeeker = require("./models/volunteerSeekerLogin.model");
+const GoogleOauth20Strategy = require("passport-google-oauth20");
+const passport = require("passport");
+const cookieSession = require("cookie-session");
+
+// cookieSession config
+app.use(
+  cookieSession({
+    maxAge: 7 * (24 * 60 * 60 * 1000), // One day in milliseconds
+    keys: ["PLACEHOLDER"], 
+  })
+);
+
+app.use(passport.initialize()); // Used to initialize passport
+app.use(passport.session()); // Used to persist login sessions
+
+passport.use(
+  new GoogleOauth20Strategy(
+    {
+      clientID:
+        "1029963969782-4br4gl8kpq1mkcnkuvsgr9upuc2ot3e0.apps.googleusercontent.com",
+      clientSecret: "_6tLXX_QysHFw2k2fWygdoKv",
+      callbackURL: "http://localhost:5000/auth/google/callback",
+    },
+    function (accessToken, refreshToken, profile, done) {
+      console.log(profile);
+      VolunteerSeeker.findOrCreate(
+        { email: profile.emails[0].value },
+        {
+          firstName: profile.name.givenName,
+          lastName: profile.name.familyName,
+        },
+        function (err, user) {
+          // Updates user picture upon each auth session
+          user.picture = profile._json.picture;
+          user.save();
+          // auth complete
+          return done(err, user);
+        }
+      );
+    }
+  )
+);
+passport.use(GoogleOauth20Strategy);
+
+// Used to stuff a piece of information into a cookie
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+// Used to decode the received cookie and persist session
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+// Middleware to check if the user is authenticated
+function isUserAuthenticated(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    res.send("You must login!");
+  }
+}
+
+// passport.authenticate middleware is used here to authenticate the request
+app.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"], // Used to specify the required data; we only want read-only access to public information
+  })
+);
+
+// The middleware receives the data from Google and runs the function on Strategy config
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google"),
+  (req, res) => {
+    console.log("Successfully logged in");
+    res.redirect("/");
+  }
+);
+
+// Ask about this - using this to retrieve user data from the Passport 'profile' object
+app.get("/userdata", isUserAuthenticated, (req, res) => {
+  Users.find({ email: req.user }, function (err, result) {
+    console.log(result);
+    res.send(result);
+  });
+});
 
 app.get("/volunteerSeeker/", (req, res) => {
   VolunteerSeeker.find()
@@ -33,26 +122,26 @@ app.get("/volunteerSeeker/", (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-app.post("/volunteerSeeker/add", (req, res) => {
-  const username = req.body.username;
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const password = req.body.password;
-  const email = req.body.email;
+// app.post("/volunteerSeeker/add", (req, res) => {
+//   const username = req.body.username;
+//   const firstName = req.body.firstName;
+//   const lastName = req.body.lastName;
+//   const password = req.body.password;
+//   const email = req.body.email;
 
-  const newVolunteerSeeker = new VolunteerSeeker({
-    username,
-    firstName,
-    lastName,
-    password,
-    email,
-  });
+//   const newVolunteerSeeker = new VolunteerSeeker({
+//     username,
+//     firstName,
+//     lastName,
+//     password,
+//     email,
+//   });
 
-  newVolunteerSeeker
-    .save()
-    .then(() => res.json("New volunteer seeker added!"))
-    .catch((err) => res.status(400).json("Error: " + err));
-});
+//   newVolunteerSeeker
+//     .save()
+//     .then(() => res.json("New volunteer seeker added!"))
+//     .catch((err) => res.status(400).json("Error: " + err));
+// });
 
 //postings routes
 const Posting = require("./models/postings.model");

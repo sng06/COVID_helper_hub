@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const findOrCreate = require("mongoose-findorcreate");
 
 const Schema = mongoose.Schema;
 
@@ -13,7 +14,7 @@ const volunteerSeekerLoginSchema = new Schema(
   {
     timestamps: true,
   }
-);
+).plugin(findOrCreate);
 
 // const VolunteerSeeker = mongoose.model(
 //   "Volunteer_seekers",
