@@ -1,4 +1,3 @@
-import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react components for routing our app without refresh
@@ -29,13 +28,30 @@ import SectionExamples from "./Sections/SectionExamples.js";
 import SectionDownload from "./Sections/SectionDownload.js";
 
 import App from "./Sections/App.js";
+import React, { useState, useEffect } from "react";
 import UserInput from "./Sections/UserInput";
+import axios from "axios";
 
 import styles from "assets/jss/material-kit-react/views/components.js";
 
 const useStyles = makeStyles(styles);
 
 export default function Components(props) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("/userdata")
+      .then((user) => {
+        setFirstName(user.data.firstName);
+        setLastName(user.data.lastName);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const classes = useStyles();
   const { ...rest } = props;
   return (
@@ -47,7 +63,7 @@ export default function Components(props) {
         color="transparent"
         changeColorOnScroll={{
           height: 400,
-          color: "white"
+          color: "white",
         }}
         {...rest}
       />
@@ -56,7 +72,13 @@ export default function Components(props) {
           <GridContainer>
             <GridItem>
               <div className={classes.brand}>
-                <h1 className={classes.title}>Website name</h1>
+                {(firstName === "") | (firstName === undefined) ? (
+                  <h1 className={classes.title}>
+                    Login to see your name here.
+                  </h1>
+                ) : (
+                  <h1 className={classes.title}>Welcome Back {firstName}.</h1>
+                )}
                 <h3 className={classes.subtitle}>
                   we need a name for this website
                 </h3>
