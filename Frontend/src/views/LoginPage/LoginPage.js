@@ -82,7 +82,7 @@ export default function LoginPage(props) {
                         color="transparent"
                         onClick={e => e.preventDefault()}
                       >
-                        <i className={"fab fa-google-plus-g"} />
+                        <i className={"fab fa-google"} />
                       </Button>
                     </div>
                   </CardHeader>
