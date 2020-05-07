@@ -62,15 +62,17 @@ export default function HeaderLinks(props) {
           dropdownList={[
             <Link to="/" className={classes.dropdownLink}>
               All components
-            </Link>
+            </Link>,
+            // <a
+            //   href="https://creativetimofficial.github.io/material-kit-react/#/documentation?ref=mkr-navbar"
+            //   target="_blank"
+            //   className={classes.dropdownLink}
+            // >
+            //   Documentation
+            // </a>
           ]}
         />
       </ListItem>
-<<<<<<< HEAD
-
-      <ListItem className={classes.listItem}>
-        {/*<Tooltip title="Delete">
-=======
       {/* <ListItem className={classes.listItem}>
         <Button
           href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
@@ -83,7 +85,6 @@ export default function HeaderLinks(props) {
       </ListItem> */}
       {/* <ListItem className={classes.listItem}>
         <Tooltip title="Delete">
->>>>>>> 6f50c88ecc9002713458b4aa51ff07547e811e0b
           <IconButton aria-label="Delete">
             <DeleteIcon />
           </IconButton>

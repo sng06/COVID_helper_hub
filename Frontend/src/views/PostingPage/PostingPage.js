@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -40,6 +40,19 @@ export default function PostingPage(props) {
   const [postTitle, setPostTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  useEffect(() => {
+    axios
+      .get("/userdata")
+      .then((res) => {
+        setFirstName(res.data.firstName);
+        setLastName(res.data.lastName);
+        setEmail(res.data.email);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const handleClick = () => {
     const posting = {
       //username: username,
@@ -53,9 +66,7 @@ export default function PostingPage(props) {
 
     console.log(posting);
 
-    axios
-      .post("http://localhost:5000/postings/add", posting)
-      .then((res) => console.log(res.data));
+    axios.post("/postings/add", posting).then((res) => console.log(res.data));
 
     window.location = "/";
   };

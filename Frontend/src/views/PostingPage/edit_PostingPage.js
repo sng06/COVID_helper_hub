@@ -40,7 +40,7 @@ export default function PostingPage(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/postings/" + this.props.match.params.id)
+      .get("/postings/" + props.match.params.id)
       .then((res) => {
         setFirstName(res.firstName);
         setLastName(res.lastName);
@@ -67,10 +67,7 @@ export default function PostingPage(props) {
     console.log(posting);
 
     axios
-      .post(
-        "http://localhost:5000/postings/update/" + this.props.match.params.id,
-        posting
-      )
+      .post("/postings/update/" + props.match.params.id, posting)
       .then((res) => console.log(res.data));
 
     window.location = "/";
