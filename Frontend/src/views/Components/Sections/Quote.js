@@ -25,7 +25,7 @@ class Quote extends Component {
                 <small>{this.state.quote}</small>
                 <br/>
                 <br/>
-                <Button onClick = {this.updateQuote}>click me</Button>
+                <Button onClick = {this.updateQuote} color='info'>click me</Button>
                 
             </div>
 

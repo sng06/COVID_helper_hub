@@ -64,23 +64,19 @@ app.get("/postings/", (req, res) => {
 });
 
 app.post("/postings/add", (req, res) => {
-  const username = req.body.username;
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
-  const postalCode = req.body.postalCode;
-  const phoneNumber = req.body.phoneNumber;
-  const gender = req.body.gender;
+  const location = req.body.location;
+  const postTitle = req.body.postTitle;
   const description = req.body.description;
 
   const newPosting = new Posting({
-    username,
     firstName,
     lastName,
     email,
-    postalCode,
-    phoneNumber,
-    gender,
+    location,
+    postTitle,
     description,
   });
 
@@ -105,13 +101,11 @@ app.delete("/postings/:id", (req, res) => {
 app.post("/postings/update/:id", (req, res) => {
   Posting.findById(req.params.id)
     .then((posting) => {
-      posting.username = req.body.username;
       posting.firstName = req.body.firstName;
       posting.lastName = req.body.lastName;
       posting.email = req.body.email;
-      posting.postalCode = req.body.postalCode;
-      posting.phoneNumber = req.body.phoneNumber;
-      posting.gender = req.body.gender;
+      posting.location = req.body.location;
+      posting.postTitle = req.body.postTitle;
       posting.description = req.body.description;
 
       posting

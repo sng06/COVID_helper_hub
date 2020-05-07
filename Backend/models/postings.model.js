@@ -4,13 +4,11 @@ const Schema = mongoose.Schema;
 
 const postingsSchema = new Schema(
   {
-    username: { type: String },
     firstName: { type: String },
     lastName: { type: String },
     email: { type: String },
-    postalCode: { type: String },
-    phoneNumber: { type: String },
-    gender: { type: String },
+    location: { type: String },
+    postTitle: { type: String },
     description: { type: String },
   },
   {
@@ -22,4 +20,4 @@ const postingsSchema = new Schema(
 
 // module.exports = { Posting };
 
-module.exports = mongoose.model("Posting", postingsSchema);
+module.exports = mongoose.model("Postings", postingsSchema);
