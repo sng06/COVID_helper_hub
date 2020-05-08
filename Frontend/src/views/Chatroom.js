@@ -7,6 +7,7 @@ import FontIcon from 'material-ui/FontIcon';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
 import { List, ListItem } from 'material-ui/List';
+import backgroundImg from './chatroom_background.png';
 
 const ChatWindow = styled.div`
   position: relative;
@@ -14,7 +15,7 @@ const ChatWindow = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   height: 100%;
-  width: 420px;
+  width: 50%;
   box-sizing: border-box;
 `
 const ChatPanel = styled.div`
@@ -144,7 +145,7 @@ export default class Chatroom extends React.Component {
                 <ChatWindow>
                     <Header>
                         <Title>
-                            "chatRoom"
+                            ChatRoom
                         </Title>
                         <RaisedButton
                             primary
@@ -160,7 +161,7 @@ export default class Chatroom extends React.Component {
                         />
                     </Header>
                     <ChatroomImage
-                        src=""
+                        src={backgroundImg}
                         alt=""
                     />
                     <ChatPanel>
@@ -168,13 +169,13 @@ export default class Chatroom extends React.Component {
                             <List>
                                 {
                                     this.state.chatHistory.map(
-                                        ({ user, message, event }, i) => [
+                                        ({ user, message, time}, i) => [
                                             <NoDots>
                                                 <ListItem
                                                     key={i}
                                                     style={{ color: '#fafafa' }}
-                                                    leftAvatar={<Avatar src="" />}
-                                                    primaryText={`Anonymous ${event || ''}`}
+                                                    leftAvatar={<Avatar src={`https://robohash.org/${user.id}?size=200x200`} />}
+                                                    primaryText={`${user.name}  ${new Date(time).toLocaleDateString()} ${new Date(time).toLocaleTimeString()}`}
                                                     secondaryText={
                                                         message &&
                                                         <OutputText>

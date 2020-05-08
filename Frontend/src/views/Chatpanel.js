@@ -8,9 +8,9 @@ import socket from './socket';
 export default class Chatpanel extends React.Component {
     constructor(props, context) {
         super(props, context);
-
+        let id = Math.floor(Math.random() * 1000);
         this.state = {
-            user: null,
+            user: {name: "anonymous", id: id},     //TODO: get user name after login
             client: socket(),
         };
 
@@ -18,12 +18,13 @@ export default class Chatpanel extends React.Component {
 
     render() {
         return (
-            // <BrowserRouter>
+            <BrowserRouter>
                 <MuiThemeProvider>
                     <Chatroom
                         user={this.state.user}
                         onSendMessage={
                             (message, cb) => this.state.client.message(
+                                this.state.user,
                                 message,
                                 cb
                             )
@@ -32,7 +33,7 @@ export default class Chatpanel extends React.Component {
                         unregisterHandler={this.state.client.unregisterHandler}
                     />
                 </MuiThemeProvider>
-            // </BrowserRouter>
+            </BrowserRouter>
         )
     }
 }
