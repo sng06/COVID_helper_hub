@@ -14,7 +14,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-import { Input } from "@material-ui/core";
+import { Input, TextField } from "@material-ui/core";
 import axios from "axios";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import { Link } from "react-router-dom";
@@ -133,7 +133,9 @@ export default function PostingPage(props) {
                       value={postTitle}
                       onChange={(e) => setPostTitle(e.target.value)}
                     />
-                    <Input
+                    <TextField
+                      multiline
+                      rows={5}  
                       id="description"
                       type="text"
                       placeholder="Description"
