@@ -11,9 +11,10 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
     history.forEach((each) => {socket.emit('message', each)});
-    function handleMessage({ name, message } = {}, callback) {
-        io.emit('message', {message: message});
-        history.push({name: name, message: message});
+    function handleMessage({ user, message } = {}, callback) {
+        let date = new Date();
+        io.emit('message', {user: user, message: message, time: date.getTime()});
+        history.push({user: user, message: message, time: date.getTime()});
         callback();
     }
     socket.on('message', handleMessage)
