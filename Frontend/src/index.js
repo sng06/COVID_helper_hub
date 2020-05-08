@@ -10,8 +10,12 @@ import Components from "views/Components/Components.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import PostingPage from "views/PostingPage/PostingPage";
+<<<<<<< HEAD
 // temperary 
 import AccountPage from "views/AccountPage/AccountPage";
+=======
+import Chatpanel from "./views/Chatpanel";
+>>>>>>> 1ef228801b526ed9b0b641ddc2611e9b37e5ecee
 
 
 var hist = createBrowserHistory();
@@ -23,7 +27,11 @@ ReactDOM.render(
       <Route path="/profile-page" component={AccountPage} />
       <Route path="/login-page" component={LoginPage} />
       <Route path="/posting-page" component={PostingPage} />
+<<<<<<< HEAD
 
+=======
+      <Route path="/chat-page" component={Chatpanel} />
+>>>>>>> 1ef228801b526ed9b0b641ddc2611e9b37e5ecee
       <Route path="/" component={Components} />
     </Switch>
   </Router>,
