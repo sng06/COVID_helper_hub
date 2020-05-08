@@ -10,6 +10,7 @@ import Components from "views/Components/Components.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import PostingPage from "views/PostingPage/PostingPage";
+import Chatpanel from "./views/Chatpanel";
 
 
 var hist = createBrowserHistory();
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/login-page" component={LoginPage} />
       <Route path="/posting-page" component={PostingPage} />
+      <Route path="/chat-page" component={Chatpanel} />
       <Route path="/" component={Components} />
     </Switch>
   </Router>,
