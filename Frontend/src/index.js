@@ -10,6 +10,7 @@ import Components from "views/Components/Components.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import PostingPage from "views/PostingPage/PostingPage";
+import edit_PostingPage from "views/PostingPage/edit_PostingPage";
 // temperary 
 import AccountPage from "views/AccountPage/AccountPage";
 import Chatpanel from "./views/Chatpanel";
@@ -24,6 +25,7 @@ ReactDOM.render(
       <Route path="/profile-page" component={AccountPage} />
       <Route path="/login-page" component={LoginPage} />
       <Route path="/posting-page" component={PostingPage} />
+      <Route path="/edit-posting-page" component={edit_PostingPage} />
 
       <Route path="/chat-page" component={Chatpanel} />
       <Route path="/" component={Components} />

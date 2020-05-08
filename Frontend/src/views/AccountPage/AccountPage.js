@@ -15,7 +15,6 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 
 import PostTable2 from "views/Components/Sections/PostTable2"
-import PostTable from "views/Components/Sections/PostTable"
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 

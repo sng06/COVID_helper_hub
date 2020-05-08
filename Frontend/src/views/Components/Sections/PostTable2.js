@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -17,26 +17,106 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import { Link } from 'react-router-dom';
+
+import axios from "axios";
+
 
 const useRowStyles = makeStyles({
-  root: {
-    '& > *': {
-      borderBottom: 'unset',
+    root: {
+        '& > *': {
+        borderBottom: 'unset',
+        },
     },
-  },
 });
 
-function createData(_id, date, firstname, lastname, location, postTitle, description) {
-  return {
-    _id, 
-    date,
-    firstname,
-    lastname,
-    location,
-    postTitle,
-    description
-  };
+
+function Row(props) {
+    const { row } = props;
+    const [open, setOpen] = React.useState(false);
+    const classes = useRowStyles();
+
+    return (
+        <React.Fragment>
+        <TableRow className={classes.root}>
+            <TableCell>
+            <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+            </TableCell>
+
+            <TableCell component="th" scope="row" show="true">
+            {row.name}
+            </TableCell>
+
+            <TableCell align="left">{row.date}</TableCell>
+            <TableCell align="left">{row.firstname}</TableCell>
+            <TableCell align="left">{row.lastname}</TableCell>
+            <TableCell align="left">{row.location}</TableCell>
+            <TableCell align="left">{row.postTitle}</TableCell>
+
+            <TableCell>
+                <Link to={"/edit-posting-page"} className={classes.link}> 
+                    <EditIcon onClick={handleEdit} /> 
+                </Link>                
+                <DeleteIcon onClick={handleDelete}/>
+            </TableCell>
+        </TableRow>
+
+        <TableRow>
+            <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                <Box margin={1}>    
+                <Typography variant="h6" gutterBottom component="div">
+                    description
+                </Typography>
+                <Typography variant="body1" gutterBottom component="div">
+                    {row.description}
+                </Typography>
+                </Box>
+            </Collapse>
+            </TableCell>
+        </TableRow>
+        </React.Fragment>
+    );
 }
+
+Row.propTypes = {
+    row: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        firstname: PropTypes.string,
+        lastname: PropTypes.string,
+        email: PropTypes.string,
+        location: PropTypes.string,
+        postTitle: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        date: PropTypes.string,
+    }).isRequired,
+};
+
+
+
+function createData(post) {
+    // console.log(post)
+
+    var _id = post._id
+    var date = post.createdAt
+    var firstname = post.firstName
+    var lastname = post.lastName
+    var location = post.location
+    var postTitle = post.postTitle
+    var description = post.description
+
+    return {
+        _id, 
+        date,
+        firstname,
+        lastname,
+        location,
+        postTitle,
+        description
+    };
+    }
 
 function handleEdit() {
     console.log("edit");
@@ -46,102 +126,61 @@ function handleDelete() {
     console.log("delete");
 }
 
-function Row(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
-  const classes = useRowStyles();
 
-  return (
-    <React.Fragment>
-      <TableRow className={classes.root}>
-        <TableCell>
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
+export default class PostTable2 extends Component {
 
-        <TableCell component="th" scope="row" show="true">
-          {row.name}
-        </TableCell>
+    constructor(props) {
+        super(props);
 
-        <TableCell align="left">{row.date}</TableCell>
-        <TableCell align="left">{row.firstname}</TableCell>
-        <TableCell align="left">{row.lastname}</TableCell>
-        <TableCell align="left">{row.location}</TableCell>
-        <TableCell align="left">{row.postTitle}</TableCell>
+        this.state = {
+            rows: [ ]
+        }
+    }
 
-        <TableCell>
-            <EditIcon onClick={handleEdit}/>
-            <DeleteIcon onClick={handleDelete}/>
-        </TableCell>
-      </TableRow>
+    componentDidMount() {
 
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box margin={1}>    
-              <Typography variant="h6" gutterBottom component="div">
-                description
-              </Typography>
-              <Typography variant="body1" gutterBottom component="div">
-                post description
-              </Typography>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
-  );
+        console.log("component did mount")
+
+        axios.get('postings/').then(resp => {
+
+            
+
+            this.setState({
+                rows: resp.data
+            });
+            // console.log(this.state.rows)
+        });
+    }
+
+    render() {
+
+        return (
+            <TableContainer component={Paper}>
+            <Table aria-label="post table">
+                <TableHead>
+                <TableRow>
+                    <TableCell />
+                    <TableCell />
+                    <TableCell align="left">date</TableCell>
+                    <TableCell align="left">first name</TableCell>
+                    <TableCell align="left">last name</TableCell>
+                    <TableCell align="left">location</TableCell>
+                    <TableCell align="left">title</TableCell>
+                    <TableCell align="left">action</TableCell>
+                </TableRow>
+                </TableHead>
+                <TableBody>
+                {this.state.rows.map((row) => (
+                    // need to filter user here
+                    <Row key={row._id} row={createData(row)} />
+                ))}
+                </TableBody>
+            </Table>
+            </TableContainer>
+        );
+
+    }
+    
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    firstname: PropTypes.string.isRequired,
-    lastname: PropTypes.string.isRequired,
-    email: PropTypes.string,
-    location: PropTypes.string.isRequired,
-    postTitle: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
-const rows = [
-  createData("id1", "date1", "firstname1", "lastname1", "loacation1", "title1", "desrciptions1"),
-  createData("id2", "date2", "firstname2", "lastname2", "loacation2", "title2", "desrciptions2"),
-  createData("id3", "date3", "firstname3", "lastname3", "loacation3", "title3", "desrciptions3"),
-  createData("id4", "date4", "firstname4", "lastname4", "loacation4", "title4", "desrciptions4"),
-  createData("id5", "date5", "firstname5", "lastname5", "loacation5", "title5", "desrciptions5"),
-  createData("id6", "date1", "firstname1", "lastname1", "loacation1", "title1", "desrciptions1"),
-  createData("id7", "date2", "firstname2", "lastname2", "loacation2", "title2", "desrciptions2"),
-  createData("id8", "date3", "firstname3", "lastname3", "loacation3", "title3", "desrciptions3"),
-  createData("id9", "date4", "firstname4", "lastname4", "loacation4", "title4",  "desrciptions4"),
-  createData("id10", "date5", "firstname5", "lastname5", "loacation5", "title5", "desrciptions5"),
-];
-
-export default function PostTable2() {
-  return (
-    <TableContainer component={Paper}>
-      <Table aria-label="post table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell />
-            <TableCell align="left">date</TableCell>
-            <TableCell align="left">first name</TableCell>
-            <TableCell align="left">last name</TableCell>
-            <TableCell align="left">location</TableCell>
-            <TableCell align="left">title</TableCell>
-            <TableCell align="left">action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <Row key={row._id} row={row} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-}
