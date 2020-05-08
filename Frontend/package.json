@@ -11,11 +11,8 @@
     "axios": "^0.19.2",
     "classnames": "2.2.6",
     "history": "4.9.0",
-<<<<<<< HEAD
     "material-table": "^1.57.2",
-=======
     "material-ui": "^0.20.2",
->>>>>>> 1ef228801b526ed9b0b641ddc2611e9b37e5ecee
     "moment": "2.24.0",
     "node-sass": "^4.14.0",
     "nouislider": "14.0.2",
