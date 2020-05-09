@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -18,13 +18,28 @@ import PostTable2 from "views/Components/Sections/PostTable2"
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
+import axios from "axios";
+
 const useStyles = makeStyles(styles);
 
 export default function AccountPage(props) {
   
-
   const classes = useStyles();
   const { ...rest } = props;
+
+  const firstName = "Username";
+
+  // const [firstName, setFirstName] = useState("");
+
+  // useEffect(() => {
+
+  //   axios.get('/userdata').then((res) => {
+  //       setFirstName(res.data.firstName);
+  //       }).catch((err) => {
+  //       console.log(err);
+  //   });
+  // }, 
+  // []);
 
   return (
     <div>
@@ -47,7 +62,7 @@ export default function AccountPage(props) {
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div className={classes.name} color="white">
-                    <h3 className={classes.title}>User name</h3>
+                    <h3 className={classes.title}>{firstName}</h3>
                     <h4>manage your posts here</h4>
                   </div>
                 </div>

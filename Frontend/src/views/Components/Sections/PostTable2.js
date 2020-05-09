@@ -31,7 +31,6 @@ const useRowStyles = makeStyles({
     },
 });
 
-
 function Row(props) {
     const { row } = props;
     const [open, setOpen] = React.useState(false);
@@ -101,12 +100,13 @@ function createData(post) {
     // console.log(post)
 
     var _id = post._id
-    var date = post.createdAt
+    var date = post.createdAt.substring(0,10)
     var firstname = post.firstName
     var lastname = post.lastName
     var location = post.location
     var postTitle = post.postTitle
     var description = post.description
+    var email = post.email
 
     return {
         _id, 
@@ -115,16 +115,28 @@ function createData(post) {
         lastname,
         location,
         postTitle,
-        description
+        description,
+        email
     };
+    
     }
 
 function handleEdit() {
     console.log("edit");
 }
 
-function handleDelete() {
-    console.log("delete");
+function handleDelete(id) {
+
+    var uri = 'postings/'+id 
+
+    axios.delete(uri).then(resp => { 
+        console.log(resp)
+    });
+
+    PostTable2.setState({
+        rows: this.state.rows.filter(el => el._id !== id)
+    })
+    
 }
 
 
@@ -134,7 +146,16 @@ export default class PostTable2 extends Component {
         super(props);
 
         this.state = {
-            rows: [ ]
+            rows: [ ], 
+            userEmail: ""
+        }
+    }
+
+    createUserPosts(row) {
+        if (row.email === this.userEmail) {
+            return (
+                <Row key={row._id} row={createData(row)}/>
+            )
         }
     }
 
@@ -148,6 +169,15 @@ export default class PostTable2 extends Component {
             });
             // console.log(this.state.rows)
         });
+
+        axios.get('/userdata').then((resp) => {
+            this.setState({
+                userEmail: resp.email
+            })
+        }).catch((err) => {
+            console.log(err);
+        });
+
     }
 
     render() {
@@ -169,8 +199,7 @@ export default class PostTable2 extends Component {
                 </TableHead>
                 <TableBody>
                 {this.state.rows.map((row) => (
-                    // need to filter user here
-                    <Row key={row._id} row={createData(row)} />
+                    this.createUserPosts(row)                  
                 ))}
                 </TableBody>
             </Table>
