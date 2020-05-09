@@ -1,7 +1,6 @@
 import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import CustomInput from "components/CustomInput/CustomInput.js";
 import { Link } from "react-router-dom";
 
 import GridContainer from "components/Grid/GridContainer.js";
@@ -10,10 +9,6 @@ import Button from "components/CustomButtons/Button.js";
 import Tooltip from "@material-ui/core/Tooltip";
 
 import styles from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.js";
-import Quote from "./Quote";
-import UserInput from "./UserInput";
-import DashBoard from "./DashBoard";
-import profilePageStyle from "assets/jss/material-kit-react/views/profilePage";
 import TableauReport from "tableau-react";
 import { Typography } from "@material-ui/core";
 
@@ -30,35 +25,11 @@ export default function App(props) {
   return (
     <div className={classes.sections}>
       <div className={classes.container}>
-        <div className={classes.title}>
-          <h2>Dashboard placeholder</h2>
-          <DashBoard />
-          <br />
-          <br />
-        </div>
-        <div className={classes.title}>
-          <h2>Test Section</h2>
-        </div>
-        <div>
-          <div className={classes.title}>
-            <h3>
-              we can put the chatbot here?
-              <br />
-              <br />
-              <Quote />
-            </h3>
-          </div>
-        </div>
+
+      
         <div className={classes.space50} />
-        {/* <div id="inputs">
-          <div className={classes.title}>
-            <UserInput />
-          </div>
-        </div> */}
-        <Button color="info" size="lg">
-          post for help
-        </Button>
-        <GridContainer className={classes.textCenter} justify="center">
+
+         <GridContainer className={classes.textCenter} justify="center">
           <GridItem align="center">
             {/* <Link to={"/posting-page"} className={classes.link}>
               <Button color="info" size="lg">
