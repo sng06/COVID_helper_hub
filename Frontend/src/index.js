@@ -10,7 +10,12 @@ import Components from "views/Components/Components.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import PostingPage from "views/PostingPage/PostingPage";
+<<<<<<< HEAD
+import edit_PostingPage from "views/PostingPage/edit_PostingPage";
+// temperary 
+=======
 // temperary
+>>>>>>> a0d6e302324510ba3e8420e274256b26c94a89c3
 import AccountPage from "views/AccountPage/AccountPage";
 import Chatpanel from "./views/Chatpanel";
 
@@ -25,6 +30,7 @@ ReactDOM.render(
       <Route path="/login-page" component={LoginPage} />
       {/* we dont need login page   */}
       <Route path="/posting-page" component={PostingPage} />
+      <Route path="/edit-posting-page" component={edit_PostingPage} />
 
       <Route path="/chat-page" component={Chatpanel} />
       <Route path="/" component={Components} />

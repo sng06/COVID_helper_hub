@@ -68,7 +68,7 @@ export default function PostingPage(props) {
 
     axios.post("/postings/add", posting).then((res) => console.log(res.data));
 
-    window.location = "/";
+    window.location = "/profile-page";
   };
 
   return (

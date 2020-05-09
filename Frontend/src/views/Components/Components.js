@@ -14,19 +14,6 @@ import Button from "components/CustomButtons/Button.js";
 import Parallax from "components/Parallax/Parallax.js";
 // sections for this page
 import HeaderLinks from "components/Header/HeaderLinks.js";
-import SectionBasics from "./Sections/SectionBasics.js";
-import SectionNavbars from "./Sections/SectionNavbars.js";
-import SectionTabs from "./Sections/SectionTabs.js";
-import SectionPills from "./Sections/SectionPills.js";
-import SectionNotifications from "./Sections/SectionNotifications.js";
-import SectionTypography from "./Sections/SectionTypography.js";
-import SectionJavascript from "./Sections/SectionJavascript.js";
-import SectionCarousel from "./Sections/SectionCarousel.js";
-import SectionCompletedExamples from "./Sections/SectionCompletedExamples.js";
-import SectionLogin from "./Sections/SectionLogin.js";
-import SectionExamples from "./Sections/SectionExamples.js";
-import SectionDownload from "./Sections/SectionDownload.js";
-
 
 
 import App from "./Sections/App.js";
@@ -98,6 +85,9 @@ export default function Components(props) {
       </Parallax>
 
       <div className={classNames(classes.main, classes.mainRaised)}>
+<<<<<<< HEAD
+        <App />
+=======
         <App isAuthenticated={isUserAuthenticated} />
         {/* <SectionBasics />
         <SectionNavbars />
@@ -118,6 +108,7 @@ export default function Components(props) {
         </GridItem>
         <SectionExamples />
         <SectionDownload /> */}
+>>>>>>> a0d6e302324510ba3e8420e274256b26c94a89c3
       </div>
       <Footer />
     </div>
