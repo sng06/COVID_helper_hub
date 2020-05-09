@@ -136,6 +136,8 @@ export default function PostingPage(props) {
                       onChange={(e) => setPostTitle(e.target.value)}
                     />
                     <Input
+                      multiline
+                      rows={5}
                       id="description"
                       type="text"
                       placeholder="Description"

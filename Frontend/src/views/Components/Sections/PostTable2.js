@@ -20,6 +20,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import { Link } from 'react-router-dom';
 
 import axios from "axios";
+import { Button } from '@material-ui/core';
 
 
 const useRowStyles = makeStyles({
@@ -141,10 +142,7 @@ export default class PostTable2 extends Component {
 
         console.log("component did mount")
 
-        axios.get('postings/').then(resp => {
-
-            
-
+        axios.get('postings/').then(resp => { 
             this.setState({
                 rows: resp.data
             });
