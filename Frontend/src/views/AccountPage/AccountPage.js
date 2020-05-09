@@ -27,19 +27,17 @@ export default function AccountPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
-  const firstName = "Username";
+  const [firstName, setFirstName] = useState("");
 
-  // const [firstName, setFirstName] = useState("");
+  useEffect(() => {
 
-  // useEffect(() => {
-
-  //   axios.get('/userdata').then((res) => {
-  //       setFirstName(res.data.firstName);
-  //       }).catch((err) => {
-  //       console.log(err);
-  //   });
-  // }, 
-  // []);
+    axios.get('/userdata').then((res) => {
+        setFirstName(res.data.firstName);
+        }).catch((err) => {
+        console.log(err);
+    });
+  }, 
+  []);
 
   return (
     <div>
@@ -80,7 +78,6 @@ export default function AccountPage(props) {
             <GridContainer justify="center" >
               <GridItem>
                 <div className={classes.description}>
-                  {/* <PostTable data/> */}
                   <PostTable2/>
                 </div>
               </GridItem>
