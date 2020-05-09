@@ -39,6 +39,12 @@ const useStyles = makeStyles(styles);
 export default function Components(props) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [isUserAuthenticated, setisUserAuthenticated] = useState(false);
+
+  const handleIsUserAuthenticated = (res) => {
+    console.log("Checking value: " + res);
+    setisUserAuthenticated(res);
+  };
 
   useEffect(() => {
     axios
@@ -57,9 +63,10 @@ export default function Components(props) {
   return (
     <div>
       <Header
-        brand="Website name"
-        rightLinks={<HeaderLinks />}
+        brand="Website Name Test"
+        rightLinks={<HeaderLinks onAuthorized={handleIsUserAuthenticated} />}
         fixed
+        //href="/landing-page"
         color="transparent"
         changeColorOnScroll={{
           height: 400,
@@ -89,7 +96,7 @@ export default function Components(props) {
       </Parallax>
 
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <App />
+        <App isAuthenticated={isUserAuthenticated} />
         {/* <SectionBasics />
         <SectionNavbars />
         <SectionTabs />
