@@ -35,7 +35,7 @@ export default function HeaderLinks(props) {
           ? (setisUserAuthenticated(true),
             console.log("USER LOG IN!!!!!!!!!!!!!"),
             props.onAuthorized(true))
-          : (setisUserAuthenticated(false), props.onAuthorized(false)); //want to update the isUserAuthenticated state here back to Components
+          : (setisUserAuthenticated(false), props.onAuthorized(false));
       })
       .catch((err) => {
         console.log(err);
@@ -116,7 +116,7 @@ export default function HeaderLinks(props) {
             size="large"
             className={classes.navLink}
           >
-            My Account (props.)
+            My Account
           </Button>
         ) : (
           //</ListItem></Link>
