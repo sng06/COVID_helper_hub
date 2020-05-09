@@ -13,11 +13,20 @@ import styles from "assets/jss/material-kit-react/views/componentsSections/basic
 import Quote from "./Quote";
 import UserInput from "./UserInput";
 import DashBoard from "./DashBoard";
+<<<<<<< HEAD
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage";
 
 const useStyles = makeStyles(styles);
 
 export default function App(props) {
+=======
+import TableauReport from "tableau-react";
+import { Typography } from '@material-ui/core';
+
+const useStyles = makeStyles(styles);
+
+export default function App() {
+>>>>>>> 9f6f667c328dba17e33d9225a02994270936c41a
   const classes = useStyles();
   //const [isUserAuthenticated, setisUserAuthenticated] = useState(false);
 
@@ -48,13 +57,17 @@ export default function App(props) {
           </div>
         </div>
         <div className={classes.space50} />
-        <div id="inputs">
+        {/* <div id="inputs">
           <div className={classes.title}>
             <UserInput />
           </div>
-        </div>
+        </div> */}
+        <Button color="info" size="lg">
+          post for help
+        </Button>
         <GridContainer className={classes.textCenter} justify="center">
           <GridItem align="center">
+<<<<<<< HEAD
             {/* <Link to={"/posting-page"} className={classes.link}>
               <Button color="info" size="lg">
                 Sign up to post
@@ -83,6 +96,15 @@ export default function App(props) {
             )}
           </GridItem>
         </GridContainer>
+=======
+            <Link to={"/posting-page"} className={classes.link}></Link>
+          </GridItem>
+        </GridContainer>
+        <br/><br/><Typography variant="h4" align="center">The super nice viz made by Tableau</Typography><br/><br/>
+        <TableauReport url="https://public.tableau.com/views/CoronavirusCovid-19DailyIndicators-OptimizedforDesktop/CoronavirusDailyIndicatorsDashboard?:embed=y&:display_count=y&:origin=viz_share_link" />
+        <br/><br/><Typography variant="h4" align="center">LOL my sad viz... at least it works :)</Typography><br/><br/>
+        <TableauReport url="https://public.tableau.com/views/COVID-19Data2/Sheet1?:display_count=y&publish=yes&:origin=viz_share_link" />
+>>>>>>> 9f6f667c328dba17e33d9225a02994270936c41a
       </div>
     </div>
   );
