@@ -1,7 +1,7 @@
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react components for routing our app without refresh
-import { Link } from "react-router-dom";
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -10,7 +10,6 @@ import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
 import Parallax from "components/Parallax/Parallax.js";
 // sections for this page
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -18,7 +17,6 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 
 import App from "./Sections/App.js";
 import React, { useState, useEffect } from "react";
-import UserInput from "./Sections/UserInput";
 import axios from "axios";
 
 import styles from "assets/jss/material-kit-react/views/components.js";
@@ -85,30 +83,8 @@ export default function Components(props) {
       </Parallax>
 
       <div className={classNames(classes.main, classes.mainRaised)}>
-<<<<<<< HEAD
-        <App />
-=======
+        {/* <App /> */}
         <App isAuthenticated={isUserAuthenticated} />
-        {/* <SectionBasics />
-        <SectionNavbars />
-        <SectionTabs />
-        <SectionPills />
-        <SectionNotifications />
-        <SectionTypography />
-        <SectionJavascript />
-        <SectionCarousel /> */}
-        {/* <SectionCompletedExamples /> */}
-        {/* <SectionLogin /> */}
-        {/* <GridItem md={12} className={classes.textCenter}>
-          <Link to={"/login-page"} className={classes.link}>
-            <Button color="primary" size="lg" simple>
-              View Login Page
-            </Button>
-          </Link>
-        </GridItem>
-        <SectionExamples />
-        <SectionDownload /> */}
->>>>>>> a0d6e302324510ba3e8420e274256b26c94a89c3
       </div>
       <Footer />
     </div>
