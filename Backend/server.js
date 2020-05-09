@@ -35,7 +35,7 @@ const cookieSession = require("cookie-session");
 app.use(
   cookieSession({
     maxAge: 7 * (24 * 60 * 60 * 1000), // One day in milliseconds
-    keys: ["PLACEHOLDER"], 
+    keys: ["PLACEHOLDER"],
   })
 );
 
@@ -117,7 +117,7 @@ app.get("/logout", (req, res) => {
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "../Frontend/", "build/")));
 
-app.get("/", (req, res) => {
+app.get("/landing-page", (req, res) => {
   // send landing page
   res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
 });
@@ -132,6 +132,15 @@ app.get("/profile-page", (req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
 });
 
+app.get("/posting-page", (req, res) => {
+  // send posting page
+  res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
+});
+
+app.get("/chat-page", (req, res) => {
+  // send chat page
+  res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
+});
 
 // Endpoint for this user's data
 app.get("/userdata", isUserAuthenticated, (req, res) => {
@@ -140,7 +149,6 @@ app.get("/userdata", isUserAuthenticated, (req, res) => {
     res.send(result);
   });
 });
-
 
 app.get("/volunteerSeeker/", (req, res) => {
   VolunteerSeeker.find()

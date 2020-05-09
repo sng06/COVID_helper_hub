@@ -28,6 +28,12 @@ const useStyles = makeStyles(styles);
 export default function Components(props) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [isUserAuthenticated, setisUserAuthenticated] = useState(false);
+
+  const handleIsUserAuthenticated = (res) => {
+    console.log("Checking value: " + res);
+    setisUserAuthenticated(res);
+  };
 
   useEffect(() => {
     axios
@@ -46,9 +52,10 @@ export default function Components(props) {
   return (
     <div>
       <Header
-        brand="Website name"
-        rightLinks={<HeaderLinks />}
+        brand="Website Name Test"
+        rightLinks={<HeaderLinks onAuthorized={handleIsUserAuthenticated} />}
         fixed
+        //href="/landing-page"
         color="transparent"
         changeColorOnScroll={{
           height: 400,
@@ -78,7 +85,30 @@ export default function Components(props) {
       </Parallax>
 
       <div className={classNames(classes.main, classes.mainRaised)}>
+<<<<<<< HEAD
         <App />
+=======
+        <App isAuthenticated={isUserAuthenticated} />
+        {/* <SectionBasics />
+        <SectionNavbars />
+        <SectionTabs />
+        <SectionPills />
+        <SectionNotifications />
+        <SectionTypography />
+        <SectionJavascript />
+        <SectionCarousel /> */}
+        {/* <SectionCompletedExamples /> */}
+        {/* <SectionLogin /> */}
+        {/* <GridItem md={12} className={classes.textCenter}>
+          <Link to={"/login-page"} className={classes.link}>
+            <Button color="primary" size="lg" simple>
+              View Login Page
+            </Button>
+          </Link>
+        </GridItem>
+        <SectionExamples />
+        <SectionDownload /> */}
+>>>>>>> a0d6e302324510ba3e8420e274256b26c94a89c3
       </div>
       <Footer />
     </div>

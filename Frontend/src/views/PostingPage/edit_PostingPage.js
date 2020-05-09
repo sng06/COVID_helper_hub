@@ -42,17 +42,17 @@ export default function PostingPage(props) {
     axios
       .get("/postings/" + props.match.params.id)
       .then((res) => {
-        setFirstName(res.firstName);
-        setLastName(res.lastName);
-        setEmail(res.email);
-        setLocation(res.location);
-        setPostTitle(res.postTitle);
-        setDescription(res.description);
+        setFirstName(res.data.firstName);
+        setLastName(res.data.lastName);
+        setEmail(res.data.email);
+        setLocation(res.data.location);
+        setPostTitle(res.data.postTitle);
+        setDescription(res.data.description);
       })
       .catch((e) => {
         console.log(e);
       });
-  });
+  }, []);
 
   const handleClick = () => {
     const posting = {

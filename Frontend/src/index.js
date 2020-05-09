@@ -10,11 +10,14 @@ import Components from "views/Components/Components.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import PostingPage from "views/PostingPage/PostingPage";
+<<<<<<< HEAD
 import edit_PostingPage from "views/PostingPage/edit_PostingPage";
 // temperary 
+=======
+// temperary
+>>>>>>> a0d6e302324510ba3e8420e274256b26c94a89c3
 import AccountPage from "views/AccountPage/AccountPage";
 import Chatpanel from "./views/Chatpanel";
-
 
 var hist = createBrowserHistory();
 
@@ -23,7 +26,9 @@ ReactDOM.render(
     <Switch>
       <Route path="/landing-page" component={Components} />
       <Route path="/profile-page" component={AccountPage} />
+      {/* need to change this to account page */}
       <Route path="/login-page" component={LoginPage} />
+      {/* we dont need login page   */}
       <Route path="/posting-page" component={PostingPage} />
       <Route path="/edit-posting-page" component={edit_PostingPage} />
 

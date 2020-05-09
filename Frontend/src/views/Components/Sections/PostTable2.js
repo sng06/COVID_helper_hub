@@ -212,7 +212,7 @@ export default class PostTable2 extends Component {
     }
 
     createUserPosts(row) {
-        if (row.email !== this.userEmail) {
+        if (row.email === this.userEmail) {
             return (
                 <Row key={row._id} row={createData(row)}/>
             )
