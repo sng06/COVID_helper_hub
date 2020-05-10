@@ -212,28 +212,34 @@ export default class PostTable2 extends Component {
     }
 
     createUserPosts(row) {
-        if (row.email === this.userEmail) {
+        // console.log(row.email)
+        // var str = row.email
+        // if (str.localeCompare(this.userEmail) === 0) {
+            // console.log("matched")
             return (
                 <Row key={row._id} row={createData(row)}/>
             )
-        }
+        // } else {
+        //     console.log("unmatched")
+        // }
     }
 
     componentDidMount() {
 
-        // console.log("component did mount")
+        console.log("component did mount")
 
         axios.get('postings/').then(resp => { 
             this.setState({
                 rows: resp.data
             });
-            // console.log(this.state.rows)
+            console.log(this.state.rows)
         });
 
         axios.get('/userdata').then((resp) => {
             this.setState({
-                userEmail: resp.email
+                userEmail: resp.data.email
             })
+            console.log(this.state.userEmail)
         }).catch((err) => {
             console.log(err);
         });
