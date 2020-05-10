@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 require("dotenv").config();
 
-//TODO: socket io  code not working with others
+//TODO:  socket io  code not working with others
 
 // const http = require('http').Server(app);
 // const io = require('socket.io')(http);
