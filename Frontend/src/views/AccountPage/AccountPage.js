@@ -35,7 +35,7 @@ export default function AccountPage(props) {
     <div>
       <Header
         color="transparent"
-        brand="Website name"
+        brand="Website Name Test"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{

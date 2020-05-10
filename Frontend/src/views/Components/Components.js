@@ -27,8 +27,6 @@ import SectionLogin from "./Sections/SectionLogin.js";
 import SectionExamples from "./Sections/SectionExamples.js";
 import SectionDownload from "./Sections/SectionDownload.js";
 
-
-
 import App from "./Sections/App.js";
 import React, { useState, useEffect } from "react";
 import UserInput from "./Sections/UserInput";
@@ -66,7 +64,7 @@ export default function Components(props) {
     <div>
       <Header
         brand="Website Name Test"
-        rightLinks={<HeaderLinks onAuthorized={handleIsUserAuthenticated} />}
+        rightLinks={<HeaderLinks onAuthorized={handleIsUserAuthenticated} />} 
         fixed
         //href="/landing-page"
         color="transparent"
