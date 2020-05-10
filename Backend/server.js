@@ -5,8 +5,7 @@ const mongoose = require("mongoose");
 const app = express();
 const port = process.env.PORT || 5000;
 const path = require("path");
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+
 
 //routes
 // volunteerSeeker routes
@@ -15,6 +14,24 @@ const VolunteerSeeker = require("./models/volunteerSeekerLogin.model");
 app.use(cors());
 app.use(express.json());
 require("dotenv").config();
+
+//TODO: socket io  code not working with others
+
+// const http = require('http').Server(app);
+// const io = require('socket.io')(http);
+
+// let history = [];
+//
+// io.on('connection', function(socket){
+//     history.forEach((each) => {socket.emit('message', each)});
+//     function handleMessage({ user, message } = {}, callback) {
+//         let date = new Date();
+//         io.emit('message', {user: user, message: message, time: date.getTime()});
+//         history.push({user: user, message: message, time: date.getTime()});
+//         callback();
+//     }
+//     socket.on('message', handleMessage)
+// });
 
 // MongoDB configuration
 const uri = process.env.ATLAS_URI;
@@ -257,19 +274,6 @@ app.get("/getRandomQuote", (req, res) => {
       res.send({ quote });
     }
   });
-});
-
-let history = [];
-
-io.on('connection', function(socket){
-    history.forEach((each) => {socket.emit('message', each)});
-    function handleMessage({ user, message } = {}, callback) {
-        let date = new Date();
-        io.emit('message', {user: user, message: message, time: date.getTime()});
-        history.push({user: user, message: message, time: date.getTime()});
-        callback();
-    }
-    socket.on('message', handleMessage)
 });
 
 app.listen(port, () =>
