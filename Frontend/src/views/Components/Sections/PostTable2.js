@@ -95,7 +95,6 @@ function Row(props) {
                     <IconButton
                       className={classes.modalCloseButton}
                       key="close"
-                      aria-label="Close"
                       color="inherit"
                       onClick={() => setClassicModal(false)}
                     >
@@ -110,7 +109,11 @@ function Row(props) {
                   </DialogContent>
                   <DialogActions className={classes.modalFooter}>
                     <Button color="default"
-                        onClick={()=>handleDelete(row._id)}>
+                        onClick={()=> {
+                            handleDelete(row._id);
+                            setClassicModal(false)
+                        }                            
+                    }>
                         yes
                     </Button>                   
                     <Button
@@ -194,7 +197,7 @@ function handleDelete(id) {
     var uri = 'postings/'+id 
 
     axios.delete(uri).then(resp => { 
-        console.log(resp)
+        console.log("deleted")
     });
     
 }
@@ -212,16 +215,17 @@ export default class PostTable2 extends Component {
     }
 
     createUserPosts(row) {
-        if (row.email === this.userEmail) {
+        // var str = row.email
+        if (row.email.localeCompare(this.state.userEmail) === 0) {
             return (
                 <Row key={row._id} row={createData(row)}/>
             )
-        }
+        } 
     }
 
     componentDidMount() {
 
-        // console.log("component did mount")
+        console.log("component did mount")
 
         axios.get('postings/').then(resp => { 
             this.setState({
@@ -232,8 +236,9 @@ export default class PostTable2 extends Component {
 
         axios.get('/userdata').then((resp) => {
             this.setState({
-                userEmail: resp.email
+                userEmail: resp.data.email
             })
+            // console.log(this.state.userEmail)
         }).catch((err) => {
             console.log(err);
         });
