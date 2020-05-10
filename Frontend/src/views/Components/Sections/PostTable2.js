@@ -95,7 +95,6 @@ function Row(props) {
                     <IconButton
                       className={classes.modalCloseButton}
                       key="close"
-                      aria-label="Close"
                       color="inherit"
                       onClick={() => setClassicModal(false)}
                     >
@@ -110,7 +109,11 @@ function Row(props) {
                   </DialogContent>
                   <DialogActions className={classes.modalFooter}>
                     <Button color="default"
-                        onClick={()=>handleDelete(row._id)}>
+                        onClick={()=> {
+                            handleDelete(row._id);
+                            setClassicModal(false)
+                        }                            
+                    }>
                         yes
                     </Button>                   
                     <Button
@@ -194,7 +197,7 @@ function handleDelete(id) {
     var uri = 'postings/'+id 
 
     axios.delete(uri).then(resp => { 
-        console.log(resp)
+        console.log("deleted")
     });
     
 }
@@ -212,16 +215,12 @@ export default class PostTable2 extends Component {
     }
 
     createUserPosts(row) {
-        // console.log(row.email)
         // var str = row.email
-        // if (str.localeCompare(this.userEmail) === 0) {
-            // console.log("matched")
+        if (row.email.localeCompare(this.state.userEmail) === 0) {
             return (
                 <Row key={row._id} row={createData(row)}/>
             )
-        // } else {
-        //     console.log("unmatched")
-        // }
+        } 
     }
 
     componentDidMount() {
@@ -232,14 +231,14 @@ export default class PostTable2 extends Component {
             this.setState({
                 rows: resp.data
             });
-            console.log(this.state.rows)
+            // console.log(this.state.rows)
         });
 
         axios.get('/userdata').then((resp) => {
             this.setState({
                 userEmail: resp.data.email
             })
-            console.log(this.state.userEmail)
+            // console.log(this.state.userEmail)
         }).catch((err) => {
             console.log(err);
         });
