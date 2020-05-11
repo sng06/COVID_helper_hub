@@ -136,18 +136,23 @@ app.get("/logout", (req, res) => {
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "../Frontend/", "build/")));
 
+app.get("/", (req, res) => {
+  // send landing page
+  res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
+});
+
 app.get("/landing-page", (req, res) => {
   // send landing page
   res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
 });
 
 app.get("/login-page", (req, res) => {
-  // send login page
+  // send login page (we dont need this)
   res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
 });
 
 app.get("/profile-page", (req, res) => {
-  // send profile page
+  // send profile page (this is the Account page)
   res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
 });
 
