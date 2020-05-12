@@ -7,15 +7,14 @@ import FontIcon from 'material-ui/FontIcon';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
 import { List, ListItem } from 'material-ui/List';
-import backgroundImg from './chatroom_background.png';
 
 const ChatWindow = styled.div`
   position: relative;
   display: inline-flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: 100%;
-  width: 50%;
+  height: 800 px;
+  width: 80%;
   box-sizing: border-box;
 `
 const ChatPanel = styled.div`
@@ -56,7 +55,6 @@ const OutputText = styled.div`
   overflow: initial !important;
   width: 100%;
   height: auto !important;
-  color: #fafafa !important;
 `
 
 const InputPanel = styled.div`
@@ -67,14 +65,8 @@ const InputPanel = styled.div`
   border-top: 1px solid #fafafa;
 `
 
-const ChatroomImage = styled.img`
-  position: absolute;
-  top: 0;
-  width: 100%;
-`
-
 const Scrollable = styled.div`
-  height: 100%;
+  height: 400px;
   overflow: auto;
 `
 
@@ -144,28 +136,24 @@ export default class Chatroom extends React.Component {
             <div style={{ height: '100%' }}>
                 <ChatWindow>
                     <Header>
-                        <Title>
-                            ChatRoom
+                        <Title style={{ color: '#3d3d3d' }}>
+                            Message Board
                         </Title>
-                        <RaisedButton
-                            primary
-                            icon={
-                                <FontIcon
-                                    style={{ fontSize: 24 }}
-                                    className="material-icons"
-                                >
-                                    {'close'}
-                                </FontIcon>
-                            }
-                            onClick={this.props.onLeave}
-                        />
+                        {/*<RaisedButton*/}
+                        {/*    primary*/}
+                        {/*    icon={*/}
+                        {/*        <FontIcon*/}
+                        {/*            style={{ fontSize: 24 }}*/}
+                        {/*            className="material-icons"*/}
+                        {/*        >*/}
+                        {/*            {'close'}*/}
+                        {/*        </FontIcon>*/}
+                        {/*    }*/}
+                        {/*    onClick={this.props.onLeave}*/}
+                        {/*/>*/}
                     </Header>
-                    <ChatroomImage
-                        src={backgroundImg}
-                        alt=""
-                    />
                     <ChatPanel>
-                        <Scrollable innerRef={(panel) => { this.panel = panel; }}>
+                        <Scrollable>
                             <List>
                                 {
                                     this.state.chatHistory.map(
@@ -173,12 +161,12 @@ export default class Chatroom extends React.Component {
                                             <NoDots>
                                                 <ListItem
                                                     key={i}
-                                                    style={{ color: '#fafafa' }}
+                                                    style={{ color: '#3d3d3d'}}
                                                     leftAvatar={<Avatar src={`https://robohash.org/${user.id}?size=200x200`} />}
-                                                    primaryText={`${user.name}  ${new Date(time).toLocaleDateString()} ${new Date(time).toLocaleTimeString()}`}
+                                                    primaryText={`${user.name || "anonymous"}  ${new Date(time).toLocaleDateString()} ${new Date(time).toLocaleTimeString()}`}
                                                     secondaryText={
                                                         message &&
-                                                        <OutputText>
+                                                        <OutputText style={{ color: '#3d3d3d' }} >
                                                             { message }
                                                         </OutputText>
                                                     }
@@ -192,9 +180,9 @@ export default class Chatroom extends React.Component {
                         </Scrollable>
                         <InputPanel>
                             <TextField
-                                textareaStyle={{ color: '#fafafa' }}
-                                hintStyle={{ color: '#fafafa' }}
-                                floatingLabelStyle={{ color: '#fafafa' }}
+                                textareaStyle={{ color: '#3d3d3d' }}
+                                hintStyle={{ color: '#3d3d3d' }}
+                                floatingLabelStyle={{ color: '#3d3d3d' }}
                                 hintText="Enter a message."
                                 floatingLabelText="Enter a message."
                                 multiLine
