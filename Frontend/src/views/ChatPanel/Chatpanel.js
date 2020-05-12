@@ -10,7 +10,7 @@ export default class Chatpanel extends React.Component {
         super(props, context);
         let id = Math.floor(Math.random() * 1000);
         this.state = {
-            user: {name: "anonymous", id: id},     //TODO: get user name after login
+            user: {name: props.user, id: id},     //TODO: get user name after login
             client: socket(),
         };
 
