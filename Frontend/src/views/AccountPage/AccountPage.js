@@ -13,19 +13,24 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
+
 import PostTable2 from "views/Components/Sections/PostTable2";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
+
 import axios from "axios";
 
 const useStyles = makeStyles(styles);
 
 export default function AccountPage(props) {
+
+
   const classes = useStyles();
   const { ...rest } = props;
 
   const [firstName, setFirstName] = useState("");
 
   useEffect(() => {
+
     axios
       .get("/userdata")
       .then((res) => {
@@ -36,6 +41,7 @@ export default function AccountPage(props) {
       });
   }, []);
 
+
   return (
     <div>
       <Header
@@ -45,7 +51,8 @@ export default function AccountPage(props) {
         fixed
         changeColorOnScroll={{
           height: 200,
-          color: "white",
+          color: "white"
+
         }}
         {...rest}
       />
@@ -64,21 +71,24 @@ export default function AccountPage(props) {
               </GridItem>
             </GridContainer>
             <GridContainer>
-              <GridItem align="right">
-                <Link to={"/posting-page"} className={classes.link}>
-                  <Button color="info">add post</Button>
-                </Link>
-              </GridItem>
+                  <GridItem align="right">
+                    <Link to={"/posting-page"} className={classes.link}> 
+                      <Button color="info">
+                        add post
+                      </Button>
+                    </Link>
+                  </GridItem>
             </GridContainer>
-            <GridContainer justify="center">
+            <GridContainer justify="center" >
               <GridItem>
                 <div className={classes.description}>
-                  <PostTable2 />
+                  <PostTable2/>
                 </div>
               </GridItem>
             </GridContainer>
-            <br />
-            <br />
+            <br/>
+            <br/>
+
           </div>
         </div>
       </div>

@@ -95,10 +95,7 @@ export default function Components(props) {
 
       <div className={classNames(classes.main, classes.mainRaised)}>
         {/* <App /> */}
-        <App
-          isAuthenticated={isUserAuthenticated}
-          user={firstName + " " + lastName}
-        />
+        <App isAuthenticated={isUserAuthenticated} user={firstName + " " + lastName} />
       </div>
       <Footer />
     </div>
