@@ -14,8 +14,7 @@ import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 
-import PostTable2 from "views/Components/Sections/PostTable2"
-
+import PostTable2 from "views/Components/Sections/PostTable2";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
 import axios from "axios";
@@ -23,7 +22,8 @@ import axios from "axios";
 const useStyles = makeStyles(styles);
 
 export default function AccountPage(props) {
-  
+
+
   const classes = useStyles();
   const { ...rest } = props;
 
@@ -31,13 +31,16 @@ export default function AccountPage(props) {
 
   useEffect(() => {
 
-    axios.get('/userdata').then((res) => {
+    axios
+      .get("/userdata")
+      .then((res) => {
         setFirstName(res.data.firstName);
-        }).catch((err) => {
+      })
+      .catch((err) => {
         console.log(err);
-    });
-  }, 
-  []);
+      });
+  }, []);
+
 
   return (
     <div>
@@ -49,6 +52,7 @@ export default function AccountPage(props) {
         changeColorOnScroll={{
           height: 200,
           color: "white"
+
         }}
         {...rest}
       />
@@ -56,7 +60,7 @@ export default function AccountPage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
-            <GridContainer justify="center" >
+            <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div className={classes.name} color="white">
@@ -84,6 +88,7 @@ export default function AccountPage(props) {
             </GridContainer>
             <br/>
             <br/>
+
           </div>
         </div>
       </div>

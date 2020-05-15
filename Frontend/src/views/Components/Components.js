@@ -62,7 +62,7 @@ export default function Components(props) {
     <div>
       <Header
         brand="Website Name Test"
-        rightLinks={<HeaderLinks onAuthorized={handleIsUserAuthenticated} />} 
+        rightLinks={<HeaderLinks onAuthorized={handleIsUserAuthenticated} />}
         fixed
         //href="/landing-page"
         color="transparent"
