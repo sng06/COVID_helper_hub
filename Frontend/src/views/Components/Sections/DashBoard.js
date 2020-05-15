@@ -15,7 +15,7 @@ class DashBoard extends Component {
             <div>
                 <GridItem xs={12} sm={12} md={8} lg={6}>
                 <NavPills
-                    color="default"
+                    color="info"
                     tabs={[
                     {
                         tabButton: "Dashboard 1",

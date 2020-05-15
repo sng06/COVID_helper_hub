@@ -3,10 +3,17 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
+import { Link } from "react-router-dom";
+
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import Button from "components/CustomButtons/Button.js";
+
 import styles from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.js";
 import Quote from "./Quote";
 import UserInput from "./UserInput";
 import DashBoard from "./DashBoard";
+
 
 
 const useStyles = makeStyles(styles);
@@ -28,7 +35,7 @@ export default function App() {
         <div className={classes.title}>
           <h2>Test Section</h2>
         </div>
-        <div id="buttons">
+        <div>
           <div className={classes.title}>
             <h3>
               we can put the chatbot here? 
@@ -45,6 +52,17 @@ export default function App() {
             <UserInput />
           </div>
         </div>
+        <GridContainer className={classes.textCenter} justify="center">
+          <GridItem align='center'>
+            <Link to={"/posting-page"} className={classes.link}>
+              <Button color='info' size='lg'>
+                post for help
+              </Button>
+            </Link>
+          </GridItem>
+        </GridContainer>
+ 
+
       </div>
     </div>
   );
