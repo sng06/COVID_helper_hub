@@ -42,17 +42,17 @@ export default function PostingPage(props) {
     axios
       .get("/postings/" + props.match.params.id)
       .then((res) => {
-        setFirstName(res.firstName);
-        setLastName(res.lastName);
-        setEmail(res.email);
-        setLocation(res.location);
-        setPostTitle(res.postTitle);
-        setDescription(res.description);
+        setFirstName(res.data.firstName);
+        setLastName(res.data.lastName);
+        setEmail(res.data.email);
+        setLocation(res.data.location);
+        setPostTitle(res.data.postTitle);
+        setDescription(res.data.description);
       })
       .catch((e) => {
         console.log(e);
       });
-  });
+  }, []);
 
   const handleClick = () => {
     const posting = {
@@ -70,7 +70,7 @@ export default function PostingPage(props) {
       .post("/postings/update/" + props.match.params.id, posting)
       .then((res) => console.log(res.data));
 
-    window.location = "/";
+    window.location = "/profile-page";
   };
 
   return (
@@ -136,6 +136,8 @@ export default function PostingPage(props) {
                       onChange={(e) => setPostTitle(e.target.value)}
                     />
                     <Input
+                      multiline
+                      rows={5}
                       id="description"
                       type="text"
                       placeholder="Description"

@@ -32,8 +32,10 @@ export default function HeaderLinks(props) {
       .get("/userdata")
       .then((res) => {
         res.data.email !== undefined && res.data.email !== ""
-          ? setisUserAuthenticated(true)
-          : setisUserAuthenticated(false);
+          ? (setisUserAuthenticated(true),
+            console.log("USER LOG IN!!!!!!!!!!!!!"),
+            props.onAuthorized(true))
+          : (setisUserAuthenticated(false), props.onAuthorized(false));
       })
       .catch((err) => {
         console.log(err);
@@ -50,7 +52,7 @@ export default function HeaderLinks(props) {
 
   return (
     <List className={classes.list}>
-      <ListItem className={classes.listItem}>
+      {/* <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
           buttonText="Components"
@@ -72,7 +74,7 @@ export default function HeaderLinks(props) {
             // </a>
           ]}
         />
-      </ListItem>
+      </ListItem> */}
       {/* <ListItem className={classes.listItem}>
         <Button
           href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
@@ -104,30 +106,35 @@ export default function HeaderLinks(props) {
             <i className={classes.socialIcons + " fab fa-twitter"} />
           </Button>
         </Tooltip>
-      </ListItem>
+      </ListItem> */}
       <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-facebook"
-          title="do we want any of this?"
-          placement={window.innerWidth > 959 ? "top" : "left"}
-          classes={{ tooltip: classes.tooltip }}
-        >
+        {isUserAuthenticated ? (
+          <Button
+            color="transparent"
+            href="/profile-page"
+            target="_blank"
+            size="large"
+            className={classes.navLink}
+          >
+            My Account
+          </Button>
+        ) : (
+          //</ListItem></Link>
           <Button
             color="transparent"
             href=""
             target="_blank"
             className={classes.navLink}
-          >
-            <i className={classes.socialIcons + " fab fa-facebook"} />
-          </Button>
-        </Tooltip>
-      </ListItem> */}
+          ></Button>
+        )}
+      </ListItem>
       <ListItem className={classes.listItem}>
         {isUserAuthenticated ? (
           <Button
             color="transparent"
             href=""
             target="_blank"
+            size="large"
             className={classes.navLink}
             onClick={logout}
           >
@@ -144,6 +151,7 @@ export default function HeaderLinks(props) {
               color="transparent"
               href=""
               target="_blank"
+              size="large"
               className={classes.navLink}
               onClick={handleClick}
             >

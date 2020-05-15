@@ -6,6 +6,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 const path = require("path");
 
+
 //routes
 // volunteerSeeker routes
 const VolunteerSeeker = require("./models/volunteerSeekerLogin.model");
@@ -13,6 +14,24 @@ const VolunteerSeeker = require("./models/volunteerSeekerLogin.model");
 app.use(cors());
 app.use(express.json());
 require("dotenv").config();
+
+//TODO:  socket io  code not working with others
+
+// const http = require('http').Server(app);
+// const io = require('socket.io')(http);
+
+// let history = [];
+//
+// io.on('connection', function(socket){
+//     history.forEach((each) => {socket.emit('message', each)});
+//     function handleMessage({ user, message } = {}, callback) {
+//         let date = new Date();
+//         io.emit('message', {user: user, message: message, time: date.getTime()});
+//         history.push({user: user, message: message, time: date.getTime()});
+//         callback();
+//     }
+//     socket.on('message', handleMessage)
+// });
 
 // MongoDB configuration
 const uri = process.env.ATLAS_URI;
@@ -35,7 +54,7 @@ const cookieSession = require("cookie-session");
 app.use(
   cookieSession({
     maxAge: 7 * (24 * 60 * 60 * 1000), // One day in milliseconds
-    keys: ["PLACEHOLDER"], 
+    keys: ["PLACEHOLDER"],
   })
 );
 
@@ -122,16 +141,30 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
 });
 
+app.get("/landing-page", (req, res) => {
+  // send landing page
+  res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
+});
+
 app.get("/login-page", (req, res) => {
-  // send login page
+  // send login page (we dont need this)
   res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
 });
 
 app.get("/profile-page", (req, res) => {
-  // send profile page
+  // send profile page (this is the Account page)
   res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
 });
 
+app.get("/posting-page", (req, res) => {
+  // send posting page
+  res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
+});
+
+app.get("/chat-page", (req, res) => {
+  // send chat page
+  res.sendFile(path.join(__dirname, "../Frontend/build/index.html"));
+});
 
 // Endpoint for this user's data
 app.get("/userdata", isUserAuthenticated, (req, res) => {
@@ -140,7 +173,6 @@ app.get("/userdata", isUserAuthenticated, (req, res) => {
     res.send(result);
   });
 });
-
 
 app.get("/volunteerSeeker/", (req, res) => {
   VolunteerSeeker.find()
@@ -252,3 +284,5 @@ app.get("/getRandomQuote", (req, res) => {
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`)
 );
+
+

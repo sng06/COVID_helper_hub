@@ -68,7 +68,7 @@ export default function PostingPage(props) {
 
     axios.post("/postings/add", posting).then((res) => console.log(res.data));
 
-    window.location = "/";
+    window.location = "/profile-page";
   };
 
   return (
@@ -135,7 +135,7 @@ export default function PostingPage(props) {
                     />
                     <TextField
                       multiline
-                      rows={5}  
+                      rows={5}
                       id="description"
                       type="text"
                       placeholder="Description"
@@ -145,11 +145,16 @@ export default function PostingPage(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Link to={"/landing-page"} className={classes.link}>
-                      <Button color="info" size="lg" onClick={handleClick}>
-                        post
-                      </Button>
-                    </Link>
+                    {/* <Link to={"/landing-page"} className={classes.link}> */}
+                    <Button
+                      color="info"
+                      size="lg"
+                      href="/profile-page"
+                      onClick={handleClick}
+                    >
+                      post
+                    </Button>
+                    {/* </Link> */}
                   </CardFooter>
                 </form>
               </Card>
