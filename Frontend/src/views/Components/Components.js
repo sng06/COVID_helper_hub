@@ -1,7 +1,7 @@
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react components for routing our app without refresh
-import { Link } from "react-router-dom";
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -10,10 +10,10 @@ import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
 import Parallax from "components/Parallax/Parallax.js";
 // sections for this page
 import HeaderLinks from "components/Header/HeaderLinks.js";
+
 import SectionBasics from "./Sections/SectionBasics.js";
 import SectionNavbars from "./Sections/SectionNavbars.js";
 import SectionTabs from "./Sections/SectionTabs.js";
@@ -29,7 +29,6 @@ import SectionDownload from "./Sections/SectionDownload.js";
 
 import App from "./Sections/App.js";
 import React, { useState, useEffect } from "react";
-import UserInput from "./Sections/UserInput";
 import axios from "axios";
 
 import styles from "assets/jss/material-kit-react/views/components.js";
@@ -64,7 +63,7 @@ export default function Components(props) {
     <div>
       <Header
         brand="Website Name Test"
-        rightLinks={<HeaderLinks onAuthorized={handleIsUserAuthenticated} />} 
+        rightLinks={<HeaderLinks onAuthorized={handleIsUserAuthenticated} />}
         fixed
         //href="/landing-page"
         color="transparent"
@@ -96,26 +95,8 @@ export default function Components(props) {
       </Parallax>
 
       <div className={classNames(classes.main, classes.mainRaised)}>
+        {/* <App /> */}
         <App isAuthenticated={isUserAuthenticated} />
-        {/* <SectionBasics />
-        <SectionNavbars />
-        <SectionTabs />
-        <SectionPills />
-        <SectionNotifications />
-        <SectionTypography />
-        <SectionJavascript />
-        <SectionCarousel /> */}
-        {/* <SectionCompletedExamples /> */}
-        {/* <SectionLogin /> */}
-        {/* <GridItem md={12} className={classes.textCenter}>
-          <Link to={"/login-page"} className={classes.link}>
-            <Button color="primary" size="lg" simple>
-              View Login Page
-            </Button>
-          </Link>
-        </GridItem>
-        <SectionExamples />
-        <SectionDownload /> */}
       </div>
       <Footer />
     </div>

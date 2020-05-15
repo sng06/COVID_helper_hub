@@ -70,7 +70,7 @@ export default function PostingPage(props) {
       .post("/postings/update/" + props.match.params.id, posting)
       .then((res) => console.log(res.data));
 
-    window.location = "/";
+    window.location = "/profile-page";
   };
 
   return (
@@ -136,6 +136,8 @@ export default function PostingPage(props) {
                       onChange={(e) => setPostTitle(e.target.value)}
                     />
                     <Input
+                      multiline
+                      rows={5}
                       id="description"
                       type="text"
                       placeholder="Description"
