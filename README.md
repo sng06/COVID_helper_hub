@@ -1,3 +1,2 @@
-# BCS-COVID-Website
-
-initial set up for frontend Reactapp and Express backend 
+# COVID_helper_hub
+A web app to supply reliable covid stats and match helpers with volunteers
