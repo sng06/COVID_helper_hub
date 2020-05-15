@@ -11,6 +11,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import styles from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.js";
 import TableauReport from "tableau-react";
 import { Typography } from "@material-ui/core";
+import Chatpanel from "../../ChatPanel/Chatpanel";
 
 const useStyles = makeStyles(styles);
 
@@ -80,6 +81,13 @@ export default function App(props) {
         <br />
         <br />
         <TableauReport url="https://public.tableau.com/views/COVID-19Data2/Sheet1?:display_count=y&publish=yes&:origin=viz_share_link" />
+        <br />
+        <br />
+        <GridContainer>
+          <GridItem align="center">
+             <Chatpanel user = {props.user} />
+          </GridItem>
+        </GridContainer>
       </div>
     </div>
   );
